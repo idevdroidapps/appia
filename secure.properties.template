@@ -1,3 +1,5 @@
 # This is a template for the `secure.properties` file
-# To use this, replace "YOUR_API_PASSWORD" with your API password and rename this file to `secure.properties`
-APPIA_API_PASSWORD="YOUR_API_KEY"
+# To use this, replace "YOUR_API_PASSWORD" with your API password and "YOUR_API_ID" with your API id.
+# Then rename this file to `secure.properties`
+APPIA_API_PASSWORD="YOUR_API_PASSWORD"
+APPIA_API_ID="YOUR_API_ID"

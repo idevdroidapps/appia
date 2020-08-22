@@ -17,17 +17,19 @@ android {
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-    // Read the API key from ./secure.properties into R.string.maps_api_key
+    // Read the API password and id from ./secure.properties into R.string.maps_api_key
     def secureProps = new Properties()
     if (file("../secure.properties").exists()) {
       file("../secure.properties")?.withInputStream { secureProps.load(it) }
     }
     resValue "string", "appia_api_password", (secureProps.getProperty("APPIA_API_PASSWORD") ?: "")
     resValue "string", "appia_api_id", (secureProps.getProperty("APPIA_API_ID") ?: "")
-    // To add your Maps API key to this project:
-    // 1. Create a file ./secure.properties
-    // 2. Add this line, where YOUR_API_KEY is your API key:
-    //        MAPS_API_KEY=YOUR_API_KEY
+    // To add your appia API password and id to this project:
+    // 1. Rename the provided template file to secure.properties or Create a file ./secure.properties
+    // 2. Add this line, where YOUR_API_PASSWORD is your API password:
+    //        APPIA_API_PASSWORD="YOUR_API_PASSWORD"
+    // 3. Add this line, where YOUR_API_ID is your API id:
+    //        APPIA_API_ID="YOUR_API_ID"
   }
   buildFeatures{
     dataBinding true
