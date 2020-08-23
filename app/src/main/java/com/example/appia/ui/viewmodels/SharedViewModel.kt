@@ -14,11 +14,22 @@ class SharedViewModel(
   private val repository: AdsRepository
 ): ViewModel() {
 
-  private var _ads = MutableLiveData<List<Campaign>>()
-  val ads: LiveData<List<Campaign>> get() = _ads
+  private var _campaigns = MutableLiveData<List<Campaign>>()
+  val campaigns: LiveData<List<Campaign>> get() = _campaigns
+
+  private var _navToSelectedCampaign = MutableLiveData<Campaign>()
+  val navToSelectedCampaign: LiveData<Campaign> get() = _navToSelectedCampaign
 
   init {
-    getAds("236", "OVUJ1DJN", "10777", "4230", "techtestsession", "2")
+    getAds("236", "OVUJ1DJN", "10777", "4230", "techtestsession", "15")
+  }
+
+  fun displayCampaignDetails(campaign: Campaign){
+    _navToSelectedCampaign.value = campaign
+  }
+
+  fun displayCampaignDetailsComplete(){
+    _navToSelectedCampaign.value = null
   }
 
   private fun getAds(
@@ -35,7 +46,7 @@ class SharedViewModel(
         val response = repository.getAds(id, password, siteId, deviceId, sessionId, totalCampaignsRequested)
         ads = response.campaigns
       }
-      _ads.value = ads
+      _campaigns.value = ads
     }
   }
 
