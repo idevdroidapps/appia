@@ -15,14 +15,14 @@ interface AdService{
 
   @Headers("Accept: application/json")
   @GET("getAds")
-  fun getAdsAsync(
+  suspend fun getAds(
     @Query("id") id: String,
     @Query("password") password: String,
     @Query("siteId") siteId: String,
     @Query("deviceId") deviceId: String,
     @Query("sessionId") sessionId: String,
     @Query("totalCampaignsRequested") totalCampaignsRequested: String
-  ): Deferred<AdResponse>
+  ): AdResponse
 
 }
 

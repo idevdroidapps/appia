@@ -18,7 +18,7 @@ object Injection {
   /**
    * Creates an instance of [AdsRepository]
    */
-  private fun provideAdsRepository(): AdsRepository {
+  fun provideAdsRepository(): AdsRepository {
     return AdsRepository.getInstance(provideAdService())
   }
 
