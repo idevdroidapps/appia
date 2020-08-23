@@ -33,18 +33,11 @@ fun TextView.setCampaignName(campaign: Campaign?) {
 }
 
 @BindingAdapter("campaignRating")
-fun TextView.setCampaignRating(campaign: Campaign?) {
-  campaign?.let {
-    text = it.rating.toString()
-  }
-}
-
-@BindingAdapter("campaignThumbnail")
-fun ImageView.campaignThumbnail(thumbnailUrl: String?) {
-  thumbnailUrl?.let { url ->
+fun ImageView.campaignRating(ratingUrl: String?) {
+  ratingUrl?.let { url ->
     val options = RequestOptions()
       .diskCacheStrategy(DiskCacheStrategy.NONE)
-      .placeholder(ColorDrawable(ContextCompat.getColor(this.context, R.color.panel_background)))
+      .placeholder(ColorDrawable(ContextCompat.getColor(this.context, android.R.color.white)))
       .fitCenter()
     try {
       Glide
@@ -53,7 +46,26 @@ fun ImageView.campaignThumbnail(thumbnailUrl: String?) {
         .apply(options)
         .into(this)
     } catch (e: Exception) {
-      Log.e("Glide", "Thumbnail Failed in Glide")
+      Log.e("Glide", "Rating Image Failed in Glide")
+    }
+  }
+}
+
+@BindingAdapter("campaignThumbnail")
+fun ImageView.campaignThumbnail(thumbnailUrl: String?) {
+  thumbnailUrl?.let { url ->
+    val options = RequestOptions()
+      .diskCacheStrategy(DiskCacheStrategy.NONE)
+      .placeholder(ColorDrawable(ContextCompat.getColor(this.context, android.R.color.white)))
+      .fitCenter()
+    try {
+      Glide
+        .with(this.context)
+        .load(url)
+        .apply(options)
+        .into(this)
+    } catch (e: Exception) {
+      Log.e("Glide", "Thumbnail Image Failed in Glide")
     }
   }
 }
