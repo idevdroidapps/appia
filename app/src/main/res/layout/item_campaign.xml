@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <androidx.cardview.widget.CardView
+    android:id="@+id/cardView_campaign_item"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginBottom="@dimen/material_design_margin_small"
+    android:layout_marginEnd="@dimen/material_design_margin_medium"
+    android:layout_marginStart="@dimen/material_design_margin_medium"
+    android:layout_marginTop="@dimen/material_design_margin_medium"
+    android:onClick="@{() -> viewModel.displayCampaignDetails(campaign)}"
+    app:cardCornerRadius="@dimen/card_radius"
+    app:cardElevation="@dimen/card_elevation">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <ImageView
+        android:id="@+id/imageView_campaign_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/material_design_margin_small"
+        app:campaignThumbnail="@{campaign.productThumbnail}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline_thumbnail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@drawable/ic_launcher_foreground" />
+
+      <ImageView
+        android:id="@+id/imageView_campaign_item_rating"
+        android:layout_width="0dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="@dimen/material_design_margin_small"
+        app:campaignRating="@{campaign.averageRatingImageURL}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_rating"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@android:drawable/star_on" />
+
+      <TextView
+        android:id="@+id/textView_campaign_item_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/material_design_margin_medium"
+        android:gravity="center_vertical"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:textSize="16sp"
+        app:campaignName="@{campaign}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_rating"
+        app:layout_constraintStart_toEndOf="@id/guideline_thumbnail"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Campaign Name" />
+
+      <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+      <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.cardview.widget.CardView>
+
+  <data>
+
+    <variable
+      name="campaign"
+      type="com.example.appia.data.models.Campaign" />
+
+    <variable
+      name="viewModel"
+      type="com.example.appia.ui.viewmodels.SharedViewModel" />
+  </data>
+
+</layout>

@@ -26,10 +26,10 @@
       android:id="@+id/cardView_detail_pic"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
+      android:layout_marginStart="32dp"
+      android:layout_marginTop="16dp"
       app:cardCornerRadius="@dimen/card_radius"
       app:cardElevation="@dimen/card_elevation"
-      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
 
@@ -45,11 +45,11 @@
 
     <LinearLayout
       android:id="@+id/linearLayout_detail_ratings"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:gravity="center"
+      android:layout_marginStart="32dp"
+      android:gravity="start|center_vertical"
       android:orientation="horizontal"
-      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/cardView_detail_pic"
       tools:ignore="UseCompoundDrawables">
@@ -115,13 +115,15 @@
       android:id="@+id/textView_detail_name"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
       android:textSize="24sp"
       android:textStyle="bold"
       app:campaignName="@{viewModel.selectedCampaign}"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/linearLayout_detail_ratings"
+      app:layout_constraintHorizontal_bias="0.2"
+      app:layout_constraintStart_toEndOf="@+id/cardView_detail_pic"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.16000003"
       tools:text="Product Name" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
   compileSdkVersion 29
@@ -17,17 +18,19 @@ android {
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-    // Read the API key from ./secure.properties into R.string.maps_api_key
+    // Read the API password and id from ./secure.properties
     def secureProps = new Properties()
     if (file("../secure.properties").exists()) {
       file("../secure.properties")?.withInputStream { secureProps.load(it) }
     }
     resValue "string", "appia_api_password", (secureProps.getProperty("APPIA_API_PASSWORD") ?: "")
     resValue "string", "appia_api_id", (secureProps.getProperty("APPIA_API_ID") ?: "")
-    // To add your Maps API key to this project:
-    // 1. Create a file ./secure.properties
-    // 2. Add this line, where YOUR_API_KEY is your API key:
-    //        MAPS_API_KEY=YOUR_API_KEY
+    // To add your appia API password and id to this project:
+    // 1. Rename the provided template file to secure.properties or Create a file ./secure.properties
+    // 2. Add this line, where YOUR_API_PASSWORD is your API password:
+    //        APPIA_API_PASSWORD="YOUR_API_PASSWORD"
+    // 3. Add this line, where YOUR_API_ID is your API id:
+    //        APPIA_API_ID="YOUR_API_ID"
   }
   buildFeatures{
     dataBinding true
@@ -75,6 +78,11 @@ dependencies {
   implementation "androidx.work:work-runtime-ktx:$work_version"
   // Retrofit
   implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+  implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit_coroutines_adapter"
+  implementation "com.squareup.okhttp3:logging-interceptor:4.8.1"
+  implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+  // Custom Tabs
+  implementation "androidx.browser:browser:1.2.0"
 
   testImplementation 'junit:junit:4.13'
   androidTestImplementation 'androidx.test:rules:1.3.0-rc03'
