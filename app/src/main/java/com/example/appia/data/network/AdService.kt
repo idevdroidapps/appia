@@ -21,7 +21,8 @@ interface AdService{
     @Query("siteId") siteId: String,
     @Query("deviceId") deviceId: String,
     @Query("sessionId") sessionId: String,
-    @Query("totalCampaignsRequested") totalCampaignsRequested: String
+    @Query("totalCampaignsRequested") totalCampaignsRequested: String,
+    @Query("lname") lastName: String = "Campbell"
   ): AdResponse
 
 }

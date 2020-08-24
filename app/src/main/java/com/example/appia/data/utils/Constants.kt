@@ -1,4 +1,4 @@
-package com.example.appia.data.constants
+package com.example.appia.data.utils
 
 object Constants {
 

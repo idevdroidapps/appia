@@ -12,10 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.appia.R
+import com.example.appia.data.utils.CustomTabHelper
 import com.example.appia.databinding.FragmentDetailsBinding
 import com.example.appia.ui.viewmodels.SharedViewModel
 
-class DetailsFragment: Fragment() {
+class DetailsFragment : Fragment() {
 
   private val viewModel: SharedViewModel by activityViewModels()
 
@@ -30,15 +31,25 @@ class DetailsFragment: Fragment() {
     binding.lifecycleOwner = this
     binding.viewModel = viewModel
 
+    // handles Call To Action button
     viewModel.navToWebUrl.observe(viewLifecycleOwner, { url ->
-//      val customTabBuilder = CustomTabsIntent.Builder()
-//      val customTabIntent = customTabBuilder.build()
-//      context?.let {
-//        customTabIntent.launchUrl(it, Uri.parse(url))
-//      }
-      url?.let {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
-        startActivity(browserIntent)
+      url?.let { ctaUrl ->
+        context?.let {
+          // check for package that can handle custom tabs
+          val packageName = CustomTabHelper().getPackageNameToUse(it, ctaUrl)
+          if(packageName == null){
+            // use default browser
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(ctaUrl))
+            startActivity(browserIntent)
+          } else {
+            // use cct
+            val customTabBuilder = CustomTabsIntent.Builder()
+            val customTabIntent = customTabBuilder.build()
+            customTabIntent.intent.setPackage(packageName)
+            customTabIntent.launchUrl(it, Uri.parse(url))
+          }
+
+        }
         viewModel.navToWebUrlComplete()
       }
     })
