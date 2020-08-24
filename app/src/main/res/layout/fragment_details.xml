@@ -5,7 +5,127 @@
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginEnd="@dimen/material_design_margin_medium"
+    android:layout_marginStart="@dimen/material_design_margin_medium"
+    android:layout_marginTop="@dimen/material_design_margin_medium">
+
+    <Button
+      android:id="@+id/button_cta"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="32dp"
+      android:onClick="@{() -> viewModel.navToWebUrl(viewModel.selectedCampaign.clickProxyURL)}"
+      app:campaignCta="@{viewModel.selectedCampaign}"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      tools:text="Button" />
+
+    <androidx.cardview.widget.CardView
+      android:id="@+id/cardView_detail_pic"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:cardCornerRadius="@dimen/card_radius"
+      app:cardElevation="@dimen/card_elevation">
+
+      <ImageView
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        app:campaignThumbnail="@{viewModel.selectedCampaign.productThumbnail}"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@drawable/ic_launcher_foreground" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <LinearLayout
+      android:id="@+id/linearLayout_detail_ratings"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:orientation="horizontal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/cardView_detail_pic"
+      tools:ignore="UseCompoundDrawables">
+
+      <ImageView
+        android:id="@+id/imageView_detail_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginEnd="@dimen/material_design_margin_xsmall"
+        app:campaignRating="@{viewModel.selectedCampaign.averageRatingImageURL}"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@android:drawable/star_on" />
+
+      <TextView
+        android:id="@+id/textView_detail_num_ratings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:campaignNumOfRatings="@{viewModel.selectedCampaign}"
+        tools:text="Num of Ratings" />
+
+    </LinearLayout>
+
+    <TextView
+      android:id="@+id/textView_detail_num_downloads"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      app:campaignNumOfDownloads="@{viewModel.selectedCampaign}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView_detail_name"
+      tools:text="Num Of Downloads" />
+
+    <TextView
+      android:id="@+id/textView_detail_category"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:campaignCategory="@{viewModel.selectedCampaign}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView_detail_num_downloads"
+      tools:text="Category" />
+
+    <TextView
+      android:id="@+id/textView_detail_description"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:textStyle="italic"
+      app:campaignDescription="@{viewModel.selectedCampaign}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView_detail_category"
+      tools:text="Long Description" />
+
+    <TextView
+      android:id="@+id/textView_detail_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:textSize="24sp"
+      android:textStyle="bold"
+      app:campaignName="@{viewModel.selectedCampaign}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/linearLayout_detail_ratings"
+      tools:text="Product Name" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <data>
+
+    <variable
+      name="viewModel"
+      type="com.example.appia.ui.viewmodels.SharedViewModel" />
+  </data>
+
 </layout>

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.appia.R
 import com.example.appia.databinding.FragmentListBinding
 import com.example.appia.ui.adapters.CampaignListAdapter
@@ -36,7 +37,8 @@ class ListFragment : Fragment() {
     // display campaign details upon item click
     viewModel.navToSelectedCampaign.observe(viewLifecycleOwner, { campaign ->
       campaign?.let {
-        Toast.makeText(context, it.productName, Toast.LENGTH_SHORT).show()
+        val action = ListFragmentDirections.actionListFragmentToDetailsFragment()
+        this.findNavController().navigate(action)
         viewModel.displayCampaignDetailsComplete()
       }
     })

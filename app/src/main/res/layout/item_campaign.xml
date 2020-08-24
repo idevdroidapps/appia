@@ -12,6 +12,7 @@
     android:layout_marginStart="@dimen/material_design_margin_medium"
     android:layout_marginTop="@dimen/material_design_margin_medium"
     android:onClick="@{() -> viewModel.displayCampaignDetails(campaign)}"
+    app:cardCornerRadius="@dimen/card_radius"
     app:cardElevation="@dimen/card_elevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout

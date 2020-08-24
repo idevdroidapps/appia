@@ -2,6 +2,7 @@ package com.example.appia.ui.adapters
 
 import android.graphics.drawable.ColorDrawable
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -26,7 +27,7 @@ fun bindEpisodesRecyclerView(
 }
 
 @BindingAdapter("campaignName")
-fun TextView.setCampaignName(campaign: Campaign?) {
+fun TextView.campaignName(campaign: Campaign?) {
   campaign?.let {
     text = it.productName
   }
@@ -36,6 +37,7 @@ fun TextView.setCampaignName(campaign: Campaign?) {
 fun ImageView.campaignRating(ratingUrl: String?) {
   ratingUrl?.let { url ->
     val options = RequestOptions()
+      .override(100, 50)
       .diskCacheStrategy(DiskCacheStrategy.NONE)
       .placeholder(ColorDrawable(ContextCompat.getColor(this.context, android.R.color.white)))
       .fitCenter()
@@ -55,6 +57,7 @@ fun ImageView.campaignRating(ratingUrl: String?) {
 fun ImageView.campaignThumbnail(thumbnailUrl: String?) {
   thumbnailUrl?.let { url ->
     val options = RequestOptions()
+      .override(280, 280)
       .diskCacheStrategy(DiskCacheStrategy.NONE)
       .placeholder(ColorDrawable(ContextCompat.getColor(this.context, android.R.color.white)))
       .fitCenter()
@@ -69,4 +72,43 @@ fun ImageView.campaignThumbnail(thumbnailUrl: String?) {
     }
   }
 }
+
+@BindingAdapter("campaignCta")
+fun Button.campaignCta(campaign: Campaign?){
+  campaign?.let {
+    text = it.callToAction
+  }
+}
+
+@BindingAdapter("campaignNumOfRatings")
+fun TextView.campaignNumOfRatings(campaign: Campaign?){
+  campaign?.let {
+    text = it.numberOfRatings
+  }
+}
+
+@BindingAdapter("campaignNumOfDownloads")
+fun TextView.campaignNumOfDownloads(campaign: Campaign?){
+  campaign?.let {
+    val msg = "Downloaded: ${it.numberOfDownloads}"
+    text = msg
+  }
+}
+
+@BindingAdapter("campaignCategory")
+fun TextView.campaignCategory(campaign: Campaign?){
+  campaign?.let {
+    val msg = "Category: ${it.categoryName}"
+    text = msg
+  }
+}
+
+@BindingAdapter("campaignDescription")
+fun TextView.campaignDescription(campaign: Campaign?){
+  campaign?.let {
+    text = it.productDescription
+  }
+}
+
+
 
