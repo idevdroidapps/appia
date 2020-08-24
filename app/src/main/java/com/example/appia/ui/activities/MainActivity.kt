@@ -2,6 +2,7 @@ package com.example.appia.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.Constraints
 import androidx.work.NetworkType
@@ -26,14 +27,24 @@ class MainActivity : AppCompatActivity() {
       Injection.provideSharedViewModelFactory()
     ).get(SharedViewModel::class.java)
 
-    // use workManager to make api request
-    val constraints = Constraints.Builder()
-      .setRequiredNetworkType(NetworkType.CONNECTED)
-      .build()
-    val oneTimeWorkRequest = OneTimeWorkRequestBuilder<CampaignWorker>()
-      .setConstraints(constraints)
-      .build()
-    WorkManager.getInstance(this@MainActivity).enqueue(oneTimeWorkRequest)
+    // check if user(developer) did not provide a secure.properties file as instructed in README.md
+    if (getString(R.string.appia_api_id).isBlank() || getString(R.string.appia_api_password).isBlank()) {
+      Toast.makeText(
+        this@MainActivity,
+        "Provide proper appia id and password. Check project README for instructions.",
+        Toast.LENGTH_LONG
+      ).show()
+    } else {
+      // use workManager to make api request
+      val constraints = Constraints.Builder()
+        .setRequiredNetworkType(NetworkType.CONNECTED)
+        .build()
+      val oneTimeWorkRequest = OneTimeWorkRequestBuilder<CampaignWorker>()
+        .setConstraints(constraints)
+        .build()
+      WorkManager.getInstance(this@MainActivity).enqueue(oneTimeWorkRequest)
+    }
+
 
   }
 }

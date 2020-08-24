@@ -31,7 +31,7 @@ class DetailsFragment : Fragment() {
     binding.lifecycleOwner = this
     binding.viewModel = viewModel
 
-    // handles Call To Action button
+    // responds to CTA button clicks
     viewModel.navToWebUrl.observe(viewLifecycleOwner, { url ->
       url?.let { ctaUrl ->
         context?.let {

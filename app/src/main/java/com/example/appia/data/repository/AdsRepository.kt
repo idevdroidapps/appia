@@ -18,13 +18,14 @@ class AdsRepository(private val adService: AdService) {
     siteId: String,
     deviceId: String,
     sessionId: String,
-    totalCampaignsRequested: String
+    totalCampaignsRequested: String,
+    lastName: String
   ) {
     GlobalScope.launch(Dispatchers.Main) {
       var campaignList = emptyList<Campaign>()
       withContext(Dispatchers.IO){
         val response =
-          adService.getAds(id, password, siteId, deviceId, sessionId, totalCampaignsRequested)
+          adService.getAds(id, password, siteId, deviceId, sessionId, totalCampaignsRequested, lastName)
         campaignList = response.campaigns
       }
       campaigns.value = campaignList

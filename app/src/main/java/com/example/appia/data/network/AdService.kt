@@ -22,7 +22,7 @@ interface AdService{
     @Query("deviceId") deviceId: String,
     @Query("sessionId") sessionId: String,
     @Query("totalCampaignsRequested") totalCampaignsRequested: String,
-    @Query("lname") lastName: String = "Campbell"
+    @Query("lname") lastName: String
   ): AdResponse
 
 }

@@ -18,7 +18,7 @@ android {
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-    // Read the API password and id from ./secure.properties into R.string.maps_api_key
+    // Read the API password and id from ./secure.properties
     def secureProps = new Properties()
     if (file("../secure.properties").exists()) {
       file("../secure.properties")?.withInputStream { secureProps.load(it) }
@@ -78,7 +78,6 @@ dependencies {
   implementation "androidx.work:work-runtime-ktx:$work_version"
   // Retrofit
   implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-  implementation 'com.squareup.retrofit2:converter-simplexml:2.5.0'
   implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit_coroutines_adapter"
   implementation "com.squareup.okhttp3:logging-interceptor:4.8.1"
   implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
