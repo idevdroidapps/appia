@@ -1,4 +1,5 @@
 # appia demo
+Android app to demonstrate basic Appia API usage.
 
 ## Specifications / Requirements
 Create an Android app that consists of two screens. The first screen contains a scrolling list of products, which uses the Appia Ads API as the datasource. In this first screen, each item should display at least name, thumbnail, rating of the product. When the user clicks on one of the items, it brings the user to the second screen. The second screen should contain all pertinent information provided by the aforementioned API. Clicking the back button should bring the user back to the first screen.
